@@ -26,23 +26,29 @@ print(selectionSort(rand))
 
 
 def binary_search():
-    value = int(input('choose a number from 1 to 10: '))
-    a = rand
-    mid = len(a) // 2
-    low = 0
-    high = len(a) - 1
-
-    while a[mid] != value and low <= high:
-        if value > a[mid]:
-            low = mid + 1
+    value = input('your number: ')
+    n = len(rand)
+    first = rand[0]
+    last = n - 1
+    resultOk = False
+    pos = -1
+    while first <= last:
+        middle = (first + last) // 2
+        if value == n[middle]:
+            first = middle
+            last = first
+            resultOk = True
+            pos = middle
         else:
-            high = mid - 1
-        mid = (low + high) // 2
-
-    if low > high:
-        return 'this number does not exist in this list'
+            if value > n[middle]:
+                first = middle + 1
+            else:
+                last = middle - 1
     else:
-        return f'your number is found on index: {mid}'
+        if resultOk:
+            print(f'your number has been found on index: {pos}')
+        else:
+            print('this number has not been found')
 
 
 print(binary_search())
