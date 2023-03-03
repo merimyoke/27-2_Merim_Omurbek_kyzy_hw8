@@ -1,54 +1,31 @@
 from random import randint
 
-rand = []
-n = 10
-for i in range(n):
-    rand.append(randint(1, 10))
-print(rand)
 
+def binary_search(search_object, list):
+    list.sort()
 
-def selectionSort(number):
-    length = len(rand)
+    middle = len(list) // 2
+    last = 0
+    first = len(list) - 1
 
-    for k in range(length - 1):
-        minimal = k
-
-        for sorting in range(k + 1, length):
-            if number[sorting] < number[minimal]:
-                minimal = sorting
-
-        number[k], number[minimal] = number[minimal], number[k]
-
-    return number
-
-
-print(selectionSort(rand))
-
-
-def binary_search():
-    value = input('your number: ')
-    n = len(rand)
-    first = rand[0]
-    last = n - 1
-    resultOk = False
-    pos = -1
-    while first <= last:
-        middle = (first + last) // 2
-        if value == n[middle]:
-            first = middle
-            last = first
-            resultOk = True
-            pos = middle
+    while list[middle] != search_object and last <= first:
+        if search_object > list[middle]:
+            last = middle + 1
         else:
-            if value > n[middle]:
-                first = middle + 1
-            else:
-                last = middle - 1
+            first = middle - 1
+        middle = (last + first) // 2
+
+    if last > first:
+        print("Not found")
     else:
-        if resultOk:
-            print(f'your number has been found on index: {pos}')
-        else:
-            print('this number has not been found')
+        print(f"index = {middle}")
+binary_search(5, [1,2,3,4,5,6,7,8,9,10])
 
 
-print(binary_search())
+def bubble_sort(unsorted_list):
+    for i in range(len(unsorted_list) - 1):
+        for k in range(len(unsorted_list) - i - 1):
+            if unsorted_list[k] > unsorted_list[k + 1]:
+                unsorted_list[k], unsorted_list[k + 1] = unsorted_list[k + 1], unsorted_list[k]
+    print(f"your sorted list: {unsorted_list}")
+bubble_sort([5,4,9,10,3,7,2,8,1,6])
